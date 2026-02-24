@@ -4,6 +4,10 @@
 
 [Get started]('/docs/getting_started.md') with the **Catenator** ecosystem.
 
+[Roadmap](roadmap.md)
+
+---
+
 ## What is a Catenator?
 
 The term **Catenator** refers to a person or system that chains items together to form a connected series. In the context of product development, a **Catenator** is the architect who takes discrete logic "atoms" and "meso" modules and chains them into a rigorous, unified technical specification. This process of catenation transforms fragmented ideas into a hardened backbone for software.
@@ -60,7 +64,6 @@ While most product teams rely on unstructured Markdown or Notion pages, the **Ca
 
 As a product architect, my work focuses on the intersection of systems thinking and AI-assisted engineering. I developed **Catenator** to solve the context collapse that occurs when scaling complex products with LLMs. In an open-source context, I serve as the lead architect and maintainer of these schemas to ensure a standardized grammar for the next generation of product management.
 
----
 
 ## Getting started
 
