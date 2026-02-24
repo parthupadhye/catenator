@@ -1,27 +1,29 @@
-# Catenator roadmap
+<p align="left">
+ <a href="./README.md"> <img src="./logo.png" alt="Catenator by Engaged Inquiry" width="100%"></a>
+</p>
 
-The **Catenator** framework is currently in active development. Our goal is to move product management from subjective prose to objective, structural data.
+# Roadmap
 
-## [Project Catenator](https://github.com/users/parthupadhye/projects/48/views/4)
+The **Catenator** framework is currently in active development by Engaged Inquiry. Our goal is to move product management from subjective prose to objective, structural data.
 
-### v0.1: The architectural foundation (Current)
+## v0.1: The architectural foundation (current)
 
 We are currently finalizing the core grammar of the framework.
 
 * **Core schemas:** Finalize the `schema.yaml` definitions for macro, meso, and micro components.
-* **Template library:** Complete the foundational Obsidian-ready markdown templates.
-* **Standard library:** Populate the repository with three reference meso modules (e.g., authentication, payment processing, and data export).
-* **Readiness metric:** Formally document the 1–5 scoring logic for manual auditing.
+* **Yaml transition:** Remove all dependencies on obsidian and markdown-specific editors.
+* **Standard library:** Populate the repository with reference meso modules for authentication and payments.
+* **Readiness metric:** Formally document the 1–5 scoring logic for automated auditing.
 
-### v0.2: The validation engine
+## v0.2: The validation engine
 
 The focus shifts from manual documentation to automated structural integrity.
 
-* **Linter release:** A command-line tool to validate **Catenator** files against the core schema.
+* **Linter release:** A command-line tool to validate Catenator yaml files against the core schema.
 * **Automated readiness check:** A script to programmatically calculate the readiness score based on metadata density.
 * **Visualizer:** A tool to generate a dependency graph showing how atoms chain into meso modules.
 
-### v1.0: AI-native assembly
+## v1.0: AI-native assembly
 
 Achieving the "zero-shot" generation goal.
 
@@ -29,4 +31,9 @@ Achieving the "zero-shot" generation goal.
 * **Schema registry:** A hosted directory of community-contributed logic atoms.
 * **The architect's console:** A web interface for assembling specs from the component library without manual YAML editing.
 
----
+
+## How to use this roadmap as an architect
+
+1. **Transparency:** By labeling the current state as **v0.1 (Incomplete)**, you manage expectations while showing that the "hard thinking" is already done.
+2. **Attracting help:** If someone sees "v0.2: Linter release" and they are a developer, they are much more likely to contribute because the task is specific.
+3. **Authority:** A roadmap proves this isn't just a single file, but a product with a lifecycle.
