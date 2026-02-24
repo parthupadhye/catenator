@@ -56,7 +56,7 @@ While most product teams rely on unstructured Markdown or Notion pages, the **Ca
 
 ## About 
 
-**Catenator** was designed and is maintained by **Parth Upadhye**, author of **[Spec-driven development with AI](https://www.amazon.com/dp/B0GNSTYJ6W)**.
+**Catenator** was designed and is maintained by **[Parth Upadhye](https://www.linkedin.com/in/parth-upadhye)**, author of **[Spec-driven development with AI](https://www.amazon.com/dp/B0GNSTYJ6W)**.
 
 As a product architect, my work focuses on the intersection of systems thinking and AI-assisted engineering. I developed **Catenator** to solve the context collapse that occurs when scaling complex products with LLMs. In an open-source context, I serve as the lead architect and maintainer of these schemas to ensure a standardized grammar for the next generation of product management.
 
@@ -73,7 +73,12 @@ For a detailed walkthrough, see [Getting started ](docs/getting_started.md).
 
 ---
 
-## License
+## Contributing
 
+This project is maintained as a rigorous, architectural standard for AI-assisted product development. [We welcome contributions](contributing.md) that help refine this "unified grammar."
+
+
+
+## License
 
 This framework (the schemas and templates) is released under the **MIT License**. Use it to build better software.
