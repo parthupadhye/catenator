@@ -67,12 +67,13 @@ As a product architect, my work focuses on the intersection of systems thinking 
 
 ## Getting started
 
+## Getting started
+
 The **Catenator** ecosystem is currently evolving.
 
-* **Documentation library:** Use the provided templates in `/templates` to begin building your own Macro, Meso, and Micro library.
-* **Validation (coming soon):** We are developing a specialized **Catenator** validator that uses AI to audit your spec against your custom schema, ensuring your **Ready Check** score is accurate and objective.
-
-For a detailed walkthrough, see [Getting started ](docs/getting_started.md).
+* **The manual:** Start with our [getting started guide](/docs/getting_started.md) for a step-by-step walkthrough.
+* **The metric:** Learn how we quantify spec quality in the [readiness score guide](/docs/readiness_score.md).
+* **Documentation library:** Use the provided templates in `/templates` to begin building your own library.
 
 ---
 

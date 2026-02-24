@@ -2,7 +2,9 @@
 
 The **Catenator** framework is currently in active development. Our goal is to move product management from subjective prose to objective, structural data.
 
-#### v0.1: The architectural foundation (Current)
+## [Project Catenator](https://github.com/users/parthupadhye/projects/48/views/4)
+
+### v0.1: The architectural foundation (Current)
 
 We are currently finalizing the core grammar of the framework.
 
@@ -11,7 +13,7 @@ We are currently finalizing the core grammar of the framework.
 * **Standard library:** Populate the repository with three reference meso modules (e.g., authentication, payment processing, and data export).
 * **Readiness metric:** Formally document the 1–5 scoring logic for manual auditing.
 
-#### v0.2: The validation engine
+### v0.2: The validation engine
 
 The focus shifts from manual documentation to automated structural integrity.
 
@@ -19,7 +21,7 @@ The focus shifts from manual documentation to automated structural integrity.
 * **Automated readiness check:** A script to programmatically calculate the readiness score based on metadata density.
 * **Visualizer:** A tool to generate a dependency graph showing how atoms chain into meso modules.
 
-#### v1.0: AI-native assembly
+### v1.0: AI-native assembly
 
 Achieving the "zero-shot" generation goal.
 
