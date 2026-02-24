@@ -2,7 +2,7 @@
 
 ### Design first. Assemble second. Generate third.
 
-**Atomic spec framework (ASF)** is a modular architecture for product documentation, designed to eliminate the "hallucination gap" in AI-generated code. Based on the principles in *[Spec-Driven Development with AI](https://www.google.com/search?q=https://books.engagedinquiry.com)*, this framework treats product logic as a library of composable data objects rather than static text.
+**Atomic spec framework (ASF)** is a modular architecture for product documentation, designed to eliminate the "hallucination gap" in AI-generated code. Based on the principles in *[Spec-Driven Development with AI](https://www.amazon.com/dp/B0GNSTYJ6W)*, this framework treats product logic as a library of composable data objects rather than static text.
 
 ---
 
