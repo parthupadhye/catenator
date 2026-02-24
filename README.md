@@ -1,7 +1,3 @@
-To position yourself as a "Thinker" and architect, this README bridges the gap between your book’s philosophy and the technical rigor of your YAML schemas. It frames your work not just as "templates," but as a **Standard for AI-Native Engineering**.
-
----
-
 # Catenator framework (CF)
 
 ### Design first. Assemble second. Generate third.
