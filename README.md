@@ -33,11 +33,11 @@ To support both scenarios, ensure every `.yaml` file maintains a high "descripti
 
 ## What is a Catenator?
 
-The term **Catenator** refers to a person or system that chAIns items together to form a connected series. In the context of product development, a **Catenator** is the architect who takes discrete logic "atoms" and "meso" modules and chAIns them into a rigorous, unified technical specification. This process of catenation transforms fragmented ideas into a hardened backbone for software.
+The term **Catenator** refers to a person or system that chains items together to form a connected series. In the context of product development, a **Catenator** is the architect who takes discrete logic "atoms" and "meso" modules and chains them into a rigorous, unified technical specification. This process of catenation transforms fragmented ideas into a hardened backbone for software.
 
 ## The problem
 
-As AI-generated code becomes the industry standard, the bottleneck has shifted from writing code to mAIntAIning context. Standard product requirements documents (PRDs) are monolithic, static, and prone to context drift—the phenomenon where AI-generated code slowly loses alignment with the original product goal because the input specs are imprecise.
+As AI-generated code becomes the industry standard, the bottleneck has shifted from writing code to maintaining context. Standard product requirements documents (PRDs) are monolithic, static, and prone to context drift—the phenomenon where AI-generated code slowly loses alignment with the original product goal because the input specs are imprecise.
 
 ## The solution
 
@@ -45,20 +45,28 @@ The **Catenator** framework is a technical methodology for assembling product sp
 
 ## Core philosophy
 
-* **Design first, assemble second, generate third:** Avoid chatting with AI. Assemble a validated logic manifest first.
-* **Atomic integrity:** Logic is stored in versioned micro-atoms, preventing redundancy and drift.
-* **Machine-readability:** Pure yaml structures allow for system prompt caching and ML indexing.
+* **Design first, assemble second, generate third:** Avoid conversational loops with AI. Assemble a validated logic manifest first to ensure the generative output has a hardened backbone.
+* **Atomic integrity:** Logic is stored in versioned micro-atoms. This prevents redundancy and context drift by ensuring every assembly points to a single, objective source of truth.
+* **Machine-readability:** Pure yaml structures allow for system prompt caching and semantic ml indexing, turning your documentation into a high-performance logic registry.
+* **Interoperability by design:** Catenator is built as an open standard. By using a vendor-neutral logic grammar, manifests can be shared across different teams, AI models, and development environments without translation loss.
+* **Open standard governance:** Similar to the evolution of openapi, catenator provides a public, schema-validated framework that allows the industry to move toward a collective library of hardened product logic.
+
+---
+
+## Why an open standard?
+
+By open-sourcing the schemas for macros, mesos, and micros, **Catenator** is establishing a "logic handshake" between the human architect and the machine executor. This ensures that any component built today remains compatible with the AI orchestrators of tomorrow.
 
 ## The hierarchy
 
-* **Macro (standards):** Global yaml rules such as security protocols, system personas, and ux standards.
-* **Meso (modules):** Versioned manifests that chAIn micro atoms into functional features.
-* **Micro (atoms):** The smallest units of objective logic like field validations, triggers, or mappings.
+* **[Macro (standards)](/library/macros/README.md):** Global yaml rules such as security protocols, system personas, and ux standards.
+* **[Meso (modules)](/library/mesos/README.md):** Versioned manifests that chain micro atoms into functional features.
+* **[Micro (atoms)](/library/micros/README.md):** The smallest units of objective logic like field validations, triggers, or mappings.
 
 
 ## Features
 
-* **Schema-Validated:** Every spec is validated agAInst `schema.yaml` to ensure technical completeness.
+* **Schema-Validated:** Every spec is validated against `schema.yaml` to ensure technical completeness.
 * **Catenator Ready:** Designed to be "catenated" (assembled) from multiple Markdown sources into a single source of truth.
 * **Ready Check 2.0:** Moving beyond manual checklists to an automated `validation_score` (1-5) based on structural metadata.
 * **AI-Native:** Optimized for RAG (Retrieval-Augmented Generation) and high-fidelity code generation.
@@ -82,7 +90,7 @@ While most product teams rely on unstructured Markdown or Notion pages, the **Ca
 
 ## About 
 
-**Catenator** was designed and is mAIntAIned by **[Parth Upadhye](https://www.linkedin.com/in/parth-upadhye)**, author of **[Spec-driven development with AI](https://www.amazon.com/dp/B0GNSTYJ6W)**.
+**Catenator** was designed and is maintained by **[Parth Upadhye](https://www.linkedin.com/in/parth-upadhye)**, author of **[Spec-driven development with AI](https://www.amazon.com/dp/B0GNSTYJ6W)**.
 
 > As a product architect, my work focuses on the intersection of systems thinking and AI-assisted engineering. I developed **Catenator** to solve the context collapse that occurs when scaling complex products with LLMs. In an open-source context, I serve as the lead architect and maintainer of these schemas to ensure a standardized grammar for the next generation of product management.
 
@@ -98,10 +106,12 @@ The **Catenator** ecosystem is currently evolving.
 
 ## Contributing
 
-This project is mAIntAIned as a rigorous, architectural standard for AI-assisted product development. [We welcome contributions](contributing.md) that help refine this "unified grammar."
+This project is maintained as a rigorous, architectural standard for AI-assisted product development. [We welcome contributions](contributing.md) that help refine this "unified grammar."
 
 ---
 
 ## License
 
 This framework (the schemas and templates) is released under the **MIT License**. Use it to build better software.
+
+---
