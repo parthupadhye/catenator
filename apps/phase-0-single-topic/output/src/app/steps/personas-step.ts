@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Dimension, FIXED_DIMENSIONS, MAX_PERSONAS } from '../core/models';
 import { parsePersonasFreetext, PersonaDraft } from '../core/parse-freetext';
+import { serializePersonas } from '../core/serialize-freetext';
 import { SessionStore } from '../core/session-store';
 import { downloadText, PERSONAS_TEMPLATE } from '../ui/freetext-template';
 
@@ -13,6 +14,9 @@ import { downloadText, PERSONAS_TEMPLATE } from '../ui/freetext-template';
  *
  * micro.parse-only-what-is-stated: a dimension the free text doesn't name stays
  * unselected.
+ * micro.pre-populated-state-renders-in-both-modes: the free-text textarea is
+ * seeded from serializePersonas(current drafts) — on load and every time the
+ * "Free text" tab is opened — so pre-populated state shows in BOTH modes.
  */
 @Component({
   selector: 'app-personas-step',
@@ -24,8 +28,8 @@ import { downloadText, PERSONAS_TEMPLATE } from '../ui/freetext-template';
     <p class="hint">Each reader has a summary and any of the five fixed dimensions. Form or markdown.</p>
 
     <div class="toggle" role="tablist">
-      <button type="button" [class.on]="mode() === 'form'" (click)="mode.set('form')">Form</button>
-      <button type="button" [class.on]="mode() === 'text'" (click)="mode.set('text')">Free text</button>
+      <button type="button" [class.on]="mode() === 'form'" (click)="setMode('form')">Form</button>
+      <button type="button" [class.on]="mode() === 'text'" (click)="setMode('text')">Free text</button>
     </div>
 
     @if (mode() === 'form') {
@@ -84,7 +88,32 @@ export class PersonasStep {
   drafts: PersonaDraft[] = this.store.personas().length
     ? this.store.personas().map((p) => ({ name: p.name, summary: p.summary, dimensions: [...p.dimensions] }))
     : [{ name: '', summary: '', dimensions: [] }];
-  freetext = '';
+  // pre-populated-state-renders-in-both-modes: seed the markdown view from state.
+  freetext = serializePersonas(this.store.personas());
+
+  /**
+   * Switching mode keeps the two views in sync: entering Free text re-serializes
+   * the current drafts; entering Form re-parses the markdown (if valid) so
+   * nothing typed in either view is lost.
+   */
+  setMode(m: 'form' | 'text'): void {
+    if (m === this.mode()) return;
+    if (m === 'text') {
+      const filled = this.drafts.filter((d) => d.name.trim() || d.summary.trim() || d.dimensions.length);
+      this.freetext = serializePersonas(filled.map((d) => ({ ...d, name: d.name.trim(), summary: d.summary.trim() })));
+    } else {
+      const parsed = parsePersonasFreetext(this.freetext);
+      if (parsed.ok && parsed.personas.length) {
+        this.drafts = parsed.personas.slice(0, this.max).map((p) => ({
+          name: p.name,
+          summary: p.summary,
+          dimensions: [...p.dimensions]
+        }));
+      }
+    }
+    this.error.set('');
+    this.mode.set(m);
+  }
 
   toggleDim(d: PersonaDraft, dim: Dimension): void {
     d.dimensions = d.dimensions.includes(dim)

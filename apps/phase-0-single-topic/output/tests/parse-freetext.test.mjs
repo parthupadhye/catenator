@@ -15,7 +15,7 @@ const FIX = join(
   '..',
   '..',
   'fixtures',
-  'rate-limiting'
+  'promotions'
 );
 const read = (f) => readFileSync(join(FIX, f), 'utf8');
 
@@ -25,25 +25,23 @@ function loadExpected() {
   const raw = read('expected-parsed.yaml').replace(/\r\n/g, '\n');
   const flat = (s) => s.replace(/\s+/g, ' ').trim();
 
-  const topic = flat(raw.match(/topicText:\s*>-\n([\s\S]*?)\n\n\S/)[1]);
-
   const srcBlock = raw.match(/sources:\n([\s\S]*?)\npersonas:/)[1];
   const s = {
     title: srcBlock.match(/title:\s*"([^"]+)"/)[1],
     reference: srcBlock.match(/reference:\s*"([^"]+)"/)[1],
-    description: flat(srcBlock.match(/description:\s*>-\n([\s\S]*)$/)[1])
+    description: flat(srcBlock.match(/description:\s*>-?\n([\s\S]*)$/)[1])
   };
 
   const persBlock = raw.match(/personas:\n([\s\S]*)$/)[1];
   const personas = [...persBlock.matchAll(
-    /- name:\s*"([^"]+)"\n\s*summary:\s*>-\n([\s\S]*?)\n\s*dimensions:\s*\[([^\]]*)\]/g
+    /- name:\s*"([^"]+)"\n\s*summary:\s*>-?\n([\s\S]*?)\n\s*dimensions:\s*\[([^\]]*)\]/g
   )].map((m) => ({
     name: m[1],
     summary: flat(m[2]),
     dimensions: m[3].split(',').map((d) => d.trim().replace(/"/g, '')).filter(Boolean)
   }));
 
-  return { topic, source: s, personas };
+  return { source: s, personas };
 }
 
 const expected = loadExpected();
@@ -72,13 +70,18 @@ test('parity: personas free text parses to exactly the expected personas', () =>
   });
 });
 
-test('parity: dimensions come back in the fixed canonical order even if written out of order', () => {
-  // fixture writes "Context, Content" and "Trust, Content" — expected is canonical
+test('parity: parsed dimensions are always in the fixed canonical order', () => {
   const p = parsePersonasFreetext(read('personas-freetext.md'));
   for (const persona of p.personas) {
     const canonicalIdx = persona.dimensions.map((d) => FIXED_DIMENSIONS.indexOf(d));
     assert.deepEqual(canonicalIdx, [...canonicalIdx].sort((a, b) => a - b));
   }
+});
+
+test('dimensions written out of order come back canonical', () => {
+  // "Trust, Content" -> canonical is Content (idx 1) then Trust (idx 4)
+  const p = parsePersonasFreetext('## R\n\nA summary.\n\nTrust, Content');
+  assert.deepEqual(p.personas[0].dimensions, ['Content', 'Trust']);
 });
 
 test('parse-only-what-is-stated: a dimension not written is not selected', () => {
