@@ -118,3 +118,62 @@ Both present, for this phase, as follows:
 ## Technology
 
 Angular frontend.
+
+## Publication types and topic types — a fixed vocabulary, not free-form structure
+
+The publication is created from one of a **fixed set of five publication
+types**, chosen once, at creation — there is no "blank" publication:
+
+- **User Manual**
+- **Reference Guide**
+- **Developer Guide**
+- **API Documentation**
+- **Product Documentation**
+
+Each publication type has a fixed **allowed set of topic types**, drawn from a
+shared catalog of 22 topic types (getting-started, introduction, setup,
+overview, summary, next-steps, api-procedure, endpoint-reference,
+authentication-guide, user-procedures, guides, tutorials, faq, sdk-reference,
+integration-tutorials, technical-manuals, architecture-documents, methods,
+errors, data-models, configuration, changelog):
+
+| Publication type | Allowed topic types |
+|---|---|
+| User Manual | user-procedures, guides, tutorials, faq |
+| Reference Guide | endpoint-reference, methods, errors, data-models, configuration |
+| Developer Guide | tutorials, sdk-reference, integration-tutorials, getting-started |
+| API Documentation | api-procedure, authentication-guide, endpoint-reference |
+| Product Documentation | any of the 22 |
+
+**What this governs, precisely — and what it doesn't:**
+
+- **Adding a topic (or child topic)** offers a type picker, filtered to only
+  the current publication's allowed topic types. The picker is the only
+  effect of type — there is no per-type structured form, no required
+  sub-fields (no `steps[]`, no `guidelines[]`), no ongoing schema
+  conformance. **A topic's content stays exactly what it already is: a
+  name and free markdown**, edited exactly as already specified. The topic
+  type is a label governing *what can be selected*, not a shape governing
+  *what must be written*.
+- **Quality Check gains a fifth check:** the publication must contain **at
+  least one topic** whose type is in its allowed set. A User Manual with
+  zero topics is invalid by this check — matching the existing pattern (a
+  named failure, not a blocking, live validation).
+- **Topic type does not constrain parent/child nesting.** Any topic, of any
+  allowed type, can be nested under any other topic in the tree — the
+  hierarchy rules already specified (arbitrary depth, siblings-only
+  reordering) are unaffected. Type filtering only applies to the *initial
+  selection list* shown when adding a topic, drawn from the publication's
+  allowed set as a whole, not from the specific parent topic's type.
+
+This is the same governance discipline already applied to Variables: a fixed,
+named vocabulary the author selects from, rather than free text — applied
+here to structure instead of substitution.
+
+### What this replaces
+
+This is the concrete mechanism for what was earlier called "Templates" —
+that deferred note is now resolved. It also replaces the earlier, larger idea
+of per-topic-type structured forms with parent-child compatibility rules:
+this is deliberately smaller — type as a selection filter and a presence
+check, not a validated content shape.
