@@ -17,6 +17,15 @@ state.topic-refraction:
       refractedOutputs: "map keyed by personaId -> text"
     persistenceScope: "in-memory / current session only — no persistence across page refresh or browser close in this phase"
   micro:
+    - id: initializes-from-default-fixture
+      rule: >
+        On first load, Steps 1-3's fields are pre-populated from
+        build-config.yaml's defaultFixture (topicText, sources,
+        personas), not left empty. This is a starting value, not a
+        locked one — the author can edit or fully replace any of it
+        exactly as if they'd typed it themselves. Nothing about
+        mandatory/validation behavior differs between fixture-sourced
+        and author-typed content.
     - id: persona-id-is-positional
       rule: >
         Each persona's id is assigned by authoring order, not derived

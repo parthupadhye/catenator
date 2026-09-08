@@ -14,3 +14,8 @@ branding:
   productName: "Catenator"
   tagline: "Creating and Refracting"
   priorNames: ["Syntaxia", "Syntaxia Studio"]
+
+defaultFixture:
+  topicText: "fixtures/promotions/topic.md"
+  sources: "fixtures/promotions/sources-freetext-markdown.md"
+  personas: "fixtures/promotions/personas-freetext.md"

@@ -1,5 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Dimension, MAX_PERSONAS, Persona, SourceItem } from './models';
+import { initialStateFromFixture } from './default-fixture';
 import { defaultModelFor } from './transports';
 
 /**
@@ -16,9 +17,18 @@ import { defaultModelFor } from './transports';
  * assigned once when the persona is added, unchanged on later edits.
  * micro.refracted-output-map: refractedOutputs is keyed by that positional id,
  * one entry per persona, never merged.
+ * micro.initializes-from-default-fixture: on first load (and on Start-over)
+ * Steps 1-3 are pre-populated from build-config.yaml's defaultFixture via
+ * seedFromDefaultFixture(). These are starting values only — every setter below
+ * behaves identically whether the value came from the fixture or the author,
+ * and the author can edit or fully replace any of it.
  */
 @Injectable({ providedIn: 'root' })
 export class SessionStore {
+  constructor() {
+    this.seedFromDefaultFixture();
+  }
+
   /** Step 1 — the one topic (system.yaml mustNever: >1 topic per lab instance). */
   readonly topicText = signal<string>('');
   /** Step 2 — sources (phase-0: a single labeled record). */
@@ -94,6 +104,20 @@ export class SessionStore {
     return n;
   }
 
+  /**
+   * micro.initializes-from-default-fixture. Sets the fields directly (not via
+   * setTopic, whose cascade would immediately clear the sources/personas we are
+   * about to seed). The sources/personas strings are run through the same
+   * parsers the free-text input mode uses, so the seeded values are exactly
+   * what the author would get by pasting that text.
+   */
+  private seedFromDefaultFixture(): void {
+    const initial = initialStateFromFixture();
+    this.topicText.set(initial.topicText);
+    this.setSources(initial.sources);
+    this.setPersonas(initial.personas); // assigns positional persona-0 / persona-1
+  }
+
   putRefraction(personaId: string, text: string): void {
     const next = new Map(this.refractedOutputs());
     next.set(personaId, text); // one entry per personaId, never merged
@@ -111,5 +135,8 @@ export class SessionStore {
     this.personas.set([]);
     this.personaSeq.set(0);
     this.refractedOutputs.set(new Map());
+    // Start-over returns to the same starting point as a first load
+    // (micro.initializes-from-default-fixture).
+    this.seedFromDefaultFixture();
   }
 }

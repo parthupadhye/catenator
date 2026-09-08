@@ -46,7 +46,7 @@ input-mode.dual:
     - id: parity-check-required
       rule: >
         Before treating a free-text parse as complete, run it against
-        apps/phase-0-single-topic/fixtures/rate-limiting/ — topic.md,
+        apps/phase-0-single-topic/fixtures/promotions/ — topic.md,
         sources-freetext-markdown.md, and personas-freetext.md — and
         confirm the parsed result matches expected-parsed.yaml exactly
         (same number of entries, same field values, dimensions matched
