@@ -346,6 +346,8 @@ verified.
 
 The single-topic fixture used for verification and pre-population has been replaced: rate-limiting → promotions (a chat-based, AI-managed store promotion feature). Rationale: rate-limiting is API-specific and doesn't generalize well as this lab's default first impression; promotions is domain-general and accessible to a non-technical reader on first look.
 
+The fixture must populate both the editor's structured form and the free-text view.
+
 A "Load example" toggle (paste-on-demand) was considered and explicitly skipped in favor of direct pre-population: Steps 1-3 now start with the fixture's content already filled in, not empty. This is a starting value, not a locked one — the author can edit or fully replace any of it exactly as if they'd typed it themselves.
 
 ## Technology

@@ -30,6 +30,21 @@ COMPONENT UPDATE MODE, `COMPONENTS = ["input-mode-dual.yaml", "state-topic-refra
 - Compliance: `apps/phase-0-single-topic/reports/compliance-2026-09-08-1052.md`
   — no Not found / Conflicting rows.
 
+## Component update — 2026-09-08 11:01
+
+COMPONENT UPDATE MODE, same COMPONENTS. `input-mode-dual.yaml` gained
+`micro.pre-populated-state-renders-in-both-modes`.
+
+- New `src/app/core/serialize-freetext.ts` — the exact inverse of the free-text
+  parser (`serializeSources` / `serializePersonas`), round-trip-tested.
+- `sources-step.ts` / `personas-step.ts` seed the Free-text textarea from
+  `serialize(current state)` on load, and re-sync both views on every
+  Form↔Free-text toggle, so pre-populated state shows in both modes.
+- New `tests/serialize-freetext.test.mjs` (6 assertions). `npm test` — 37/37.
+  `ng build` clean.
+- Compliance: `apps/phase-0-single-topic/reports/compliance-2026-09-08-1101.md`
+  — no Not found / Conflicting rows.
+
 ## Components → files
 
 | Component | Built in |

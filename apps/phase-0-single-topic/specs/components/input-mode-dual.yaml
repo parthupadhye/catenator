@@ -25,6 +25,18 @@ input-mode.dual:
   micro:
     - id: mode-parity
       rule: "Free-text input must parse into the exact same fields the structured form writes"
+    - id: pre-populated-state-renders-in-both-modes
+      rule: >
+        When a field's underlying state is pre-populated (e.g. from
+        state.topic-refraction's initializes-from-default-fixture
+        rule), BOTH the structured form AND the free-text view must
+        display that content — not just whichever mode happens to
+        bind directly to the state object. The free-text textarea's
+        content is the reverse-serialization of the same state into
+        markdown, generated at render time, the same fields and
+        format mode-parity already requires for parsing. Pre-
+        population that only reaches the structured form and leaves
+        free-text empty is a violation of this rule.
     - id: sources-format
       rule: >
         Sources free text is markdown, using H2 sections: "## Title",

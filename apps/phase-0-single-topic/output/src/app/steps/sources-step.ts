@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { parseSourcesFreetext } from '../core/parse-freetext';
+import { serializeSources } from '../core/serialize-freetext';
 import { SessionStore } from '../core/session-store';
 import { SourceItem } from '../core/models';
 import { downloadText, SOURCES_TEMPLATE } from '../ui/freetext-template';
@@ -15,6 +16,9 @@ import { downloadText, SOURCES_TEMPLATE } from '../ui/freetext-template';
  * placeholder.
  * micro.advance-after-parse: once free text parses, "Continue" behaves exactly
  * like the form path.
+ * micro.pre-populated-state-renders-in-both-modes: the free-text textarea is
+ * seeded from serializeSources(current fields) — on load and every time the
+ * "Free text" tab is opened — so pre-populated state shows in BOTH modes.
  */
 @Component({
   selector: 'app-sources-step',
@@ -26,8 +30,8 @@ import { downloadText, SOURCES_TEMPLATE } from '../ui/freetext-template';
     <p class="hint">One reference record. Enter it as a form or as markdown — both write the same fields.</p>
 
     <div class="toggle" role="tablist">
-      <button type="button" [class.on]="mode() === 'form'" (click)="mode.set('form')">Form</button>
-      <button type="button" [class.on]="mode() === 'text'" (click)="mode.set('text')">Free text</button>
+      <button type="button" [class.on]="mode() === 'form'" (click)="setMode('form')">Form</button>
+      <button type="button" [class.on]="mode() === 'text'" (click)="setMode('text')">Free text</button>
     </div>
 
     @if (mode() === 'form') {
@@ -70,7 +74,31 @@ export class SourcesStep {
   title = this.existing?.title ?? '';
   reference = this.existing?.reference ?? '';
   description = this.existing?.description ?? '';
-  freetext = '';
+  // pre-populated-state-renders-in-both-modes: seed the markdown view from state.
+  freetext = serializeSources(this.store.sources());
+
+  /**
+   * Switching mode keeps the two views in sync: entering Free text re-serializes
+   * the current form fields; entering Form re-parses the markdown (if valid) so
+   * nothing typed in either view is lost.
+   */
+  setMode(m: 'form' | 'text'): void {
+    if (m === this.mode()) return;
+    if (m === 'text') {
+      this.freetext = serializeSources([
+        { title: this.title.trim(), reference: this.reference.trim(), description: this.description.trim() }
+      ].filter((s) => s.title || s.reference || s.description));
+    } else {
+      const parsed = parseSourcesFreetext(this.freetext);
+      if (parsed.ok && parsed.sources[0]) {
+        this.title = parsed.sources[0].title;
+        this.reference = parsed.sources[0].reference;
+        this.description = parsed.sources[0].description;
+      }
+    }
+    this.error.set('');
+    this.mode.set(m);
+  }
 
   private resolve(): SourceItem[] | null {
     if (this.mode() === 'text') {
