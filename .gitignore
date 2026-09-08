@@ -1,1 +1,6 @@
 .obsidian/
+
+# Generated app output — not committed, EXCEPT reader-app/output/, which is kept
+# in the repo as a reference example of a completed build.
+apps/*/output/
+!apps/reader-app/output/
